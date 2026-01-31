@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Thinking & Innovation - 21st Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            /* background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%); */
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -30px auto 0;
+            padding: 40px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .content-card h2 {
+            color: #f5576c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .actions-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .actions-container h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 70px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(245, 87, 108, 0.4);
+        }
+
+        .links-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .links-section.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .links-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .links-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .links-list a {
+            background: white;
+            color: #f5576c;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 4px solid #f5576c;
+        }
+
+        .links-list a:hover {
+            background: #f5576c;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .content-card {
+                padding: 30px 25px;
+            }
+            
+            .btn-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="intro.html" class="back-btn">← Back to Dashboard</a>
+        <h1>🎨 Creative Thinking & Innovation</h1>
+        <p>Unlock your creative potential and innovative mindset</p>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2>What is Creative Thinking?</h2>
+            <p>
+                Creative thinking is the ability to consider something in a new way or from a different perspective. 
+                It involves generating original ideas, finding unique solutions to problems, and approaching challenges 
+                with an open and flexible mindset. Creative thinking is not limited to artistic endeavors; it's a 
+                valuable skill in every field, from science and technology to business and education.
+            </p>
+            <p>
+                Innovation builds upon creative thinking by transforming creative ideas into practical solutions that 
+                create value. It's the process of implementing creative thoughts to develop new products, services, 
+                processes, or ways of thinking that improve existing conditions. In today's rapidly changing world, 
+                the ability to think creatively and innovate is essential for personal growth, career success, and 
+                contributing meaningfully to society.
+            </p>
+        </div>
+
+        <div class="actions-container">
+            <h3>Explore Creative Thinking Resources</h3>
+            
+            <div class="btn-grid">
+                <button class="action-btn" onclick="toggleSection('videos')">
+                    📹 View YouTube Videos
+                </button>
+                <button class="action-btn" onclick="toggleSection('references')">
+                    🔗 View Reference Links
+                </button>
+                <a href="quiz.html?skill=creativity" class="action-btn">
+                    📝 Attempt Quiz
+                </a>
+            </div>
+
+            <div id="videos" class="links-section">
+                <h4>📹 YouTube Videos on Creative Thinking</h4>
+                <div class="links-list">
+                    <a href="https://youtu.be/bEusrD8g-dM?si=8dTR_S2UdmTVqCC8" target="_blank">
+                        Creative thinking - how to get out of the box and generate ideas
+                    </a>
+                    <a href="https://youtu.be/auMu5-BSehc?si=Al4YtFb77X6S4NRP" target="_blank">
+                        How To Develop A Creative Mind? 6 Hacks For Creative Thinking
+                    </a>
+                    <a href="https://youtu.be/sMpLtJUte2c?si=DIpqSiIoBtxw9xoC" target="_blank">
+                        The Power of Creative Thinking - Educational Video
+                    </a>
+                </div>
+            </div>
+
+            <div id="references" class="links-section">
+                <h4>🔗 Reference Materials & Resources</h4>
+                <div class="links-list">
+                    <a href="https://en.wikipedia.org/wiki/Creativity" target="_blank">
+                        Wikipedia - What is Creativity?
+                    </a>
+                    <a href="https://en.wikipedia.org/wiki/Innovation" target="_blank">
+                        Wikipedia - Innovation Explained
+                    </a>
+                    <a href="https://www.ted.com/topics/creativity" target="_blank">
+                        TED Talks on Creativity
+                    </a>
+                    <a href="https://hbr.org/topic/innovation" target="_blank">
+                        Harvard Business Review - Innovation Articles
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.links-section');
+            
+            // Hide all other sections
+            allSections.forEach(s => {
+                if (s.id !== sectionId) {
+                    s.classList.remove('show');
+                }
+            });
+            
+            // Toggle the clicked section
+            section.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

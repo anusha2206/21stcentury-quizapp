@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical Thinking Skills - 21st Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -30px auto 0;
+            padding: 40px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .content-card h2 {
+            color: #6dd5ed;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .actions-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .actions-container h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            /* background: linear-gradient(45deg, #667eea, #764ba2); */
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 70px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .links-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .links-section.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .links-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .links-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .links-list a {
+            background: white;
+            color: #667eea;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .links-list a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .content-card {
+                padding: 30px 25px;
+            }
+            
+            .btn-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="intro.html" class="back-btn">← Back to Dashboard</a>
+        <h1>🧠 Critical Thinking</h1>
+        <p>Develop analytical and logical reasoning skills</p>
+    </header>
+
+    <div class="container">
+        <div class="content-card">
+            <h2>What is Critical Thinking?</h2>
+            <p>
+                Critical thinking is the objective analysis and evaluation of information to form well-reasoned judgments 
+                and decisions. It involves actively questioning assumptions, examining evidence, identifying logical 
+                connections between ideas, and considering multiple perspectives before reaching conclusions. Critical 
+                thinking goes beyond simply accepting information at face value; it requires systematic investigation, 
+                logical reasoning, and the ability to distinguish between reliable and unreliable sources of information.
+            </p>
+            <p>
+                In our information-rich world, critical thinking skills are more important than ever. They enable 
+                individuals to navigate complex problems, make informed decisions, avoid manipulation, and contribute 
+                meaningfully to discussions and debates. Whether analyzing news articles, solving workplace challenges, 
+                or making personal life decisions, critical thinking helps us separate fact from opinion, identify bias, 
+                recognize logical fallacies, and develop creative solutions to problems. These skills are essential for 
+                academic success, professional growth, and active citizenship in a democratic society.
+            </p>
+        </div>
+
+        <div class="actions-container">
+            <h3>Explore Critical Thinking Resources</h3>
+            
+            <div class="btn-grid">
+                <button class="action-btn" onclick="toggleSection('videos')">
+                    📹 View YouTube Videos
+                </button>
+                <button class="action-btn" onclick="toggleSection('references')">
+                    🔗 View Reference Links
+                </button>
+                <a href="quiz.html?skill=criticalThinking" class="action-btn">
+                    📝 Attempt Quiz
+                </a>
+
+            </div>
+
+            <div id="videos" class="links-section">
+                <h4>📹 YouTube Videos on Critical Thinking</h4>
+                <div class="links-list">
+                    <a href="https://youtu.be/RyqFD5OAJ40?si=i7y9i1S_C6oa2wCG" target="_blank">
+                        Critical Thinking Skills - Introduction
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=6OLPL5p0fMg" target="_blank">
+                        Problem Solving Strategies and Techniques
+                    </a>
+                    <a href="https://youtu.be/dItUGF8GdTw?si=vgzalctN3ds88OjT" target="_blank">
+                        5 Tips to Improve Your Critical Thinking
+                    </a>
+                    <a href="https://youtu.be/x0vUsxhMczI?si=w2SDaIDGXXlcviP6" target="_blank">
+                        The Art of Critical Thinking - Jordan Peterson
+                    </a>
+                </div>
+            </div>
+
+            <div id="references" class="links-section">
+                <h4>🔗 Reference Materials & Resources</h4>
+                <div class="links-list">
+                    <a href="https://www.skillsyouneed.com/learn/critical-thinking.html" target="_blank">
+                        Skills You Need - Critical Thinking Guide
+                    </a>
+                    <a href="https://en.wikipedia.org/wiki/Critical_thinking" target="_blank">
+                        Wikipedia - Critical Thinking
+                    </a>
+                    <a href="https://en.wikipedia.org/wiki/Problem_solving" target="_blank">
+                        Wikipedia - Problem Solving Techniques
+                    </a>
+                    <a href="https://www.criticalthinking.org/" target="_blank">
+                        Foundation for Critical Thinking
+                    </a>
+                    <!-- <a href="https://www.clearerthinking.org/" target="_blank">
+                        ClearerThinking
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.links-section');
+            
+            // Hide all other sections
+            allSections.forEach(s => {
+                if (s.id !== sectionId) {
+                    s.classList.remove('show');
+                }
+            });
+            
+            // Toggle the clicked section
+            section.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

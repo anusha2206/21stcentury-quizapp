@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - 21st Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .quiz-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .quiz-progress {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 8px;
+            min-width: 200px;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            height: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            width: 10%;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .question-number {
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 18px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+            transform: translateX(10px);
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #adb5bd;
+            transition: all 0.3s ease;
+        }
+
+        .option.selected::before {
+            background: white;
+            border-color: white;
+        }
+
+        .option.selected::after {
+            content: '✓';
+            position: absolute;
+            left: 19px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .option-text {
+            margin-left: 35px;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .quiz-complete {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .complete-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .complete-title {
+            font-size: 2rem;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .complete-message {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #dc3545;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-card {
+                padding: 25px 20px;
+                margin: 15px;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .options-container {
+                gap: 12px;
+            }
+
+            .option {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            .quiz-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+        .analysis-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .analysis-content {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .analysis-content h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .analysis-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .analysis-buttons .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" onclick="goBack()">← Back</button>
+        <div class="quiz-header">
+            <h1 class="quiz-title" id="quizTitle">Quiz</h1>
+            <div class="quiz-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Question 1 of 10</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="quiz-card">
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState">
+                <div class="loading-spinner"></div>
+                <h3>Loading Quiz Questions...</h3>
+                <p>Please wait while we prepare your personalized quiz.</p>
+            </div>
+
+            <!-- Quiz Content -->
+            <div id="quizContent" style="display: none;">
+                <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+                <div class="quiz-controls">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+                </div>
+            </div>
+
+            <!-- Analysis Modal -->
+                <div id="analysisModal" class="analysis-modal" style="display:none;">
+                    <div class="analysis-content">
+                        <h2>📊 Quiz Analysis</h2>
+                        <p><strong>Skill Attempted:</strong> <span id="analysisSkill"></span></p>
+                        <p><strong>Total Score:</strong> <span id="analysisScore">0</span> / <span id="analysisMax">0</span></p>
+                        <p><strong>Percentage:</strong> <span id="analysisPercentage">0%</span></p>
+                        <p><strong>Time Taken:</strong> <span id="analysisTime">0s</span></p>
+
+                        <div class="analysis-buttons">
+                            <button class="btn btn-primary" onclick="restartQuiz()">🔄 Restart Quiz</button>
+                            <button class="btn btn-secondary" onclick="quitQuiz()">❌ Quit Quiz</button>
+                            <button class="btn btn-success" onclick="downloadAnalysis()">💾 Download Results</button>
+                            <button class="btn btn-info" onclick="goToIntro()">🏠 Go to Dashboard</button>
+                        </div>
+                        <button class="close-btn" onclick="closeAnalysis()">✖</button>
+                    </div>
+                </div>
+
+
+            <!-- Quiz Complete -->
+            <div class="quiz-complete" id="quizComplete" style="display: none;">
+                <div class="complete-icon">🎉</div>
+                <h2 class="complete-title">Quiz Completed!</h2>
+                <p class="complete-message">
+                    Great job! You've successfully answered all 10 questions.
+                </p>
+                <div class="score-summary">
+                    <p>Your Score: <span id="scoreText">0</span> / 40</p>
+                    <p>Percentage: <span id="percentageText">0%</span></p>
+                </div>
+                <button class="btn btn-success" onclick="showAnalysis()">📊 View Analysis</button>
+            </div>
+            <!-- <div class="quiz-complete" id="quizComplete" style="display: none;">
+                <div class="complete-icon">🎉</div>
+                <h2 class="complete-title">Quiz Completed!</h2>
+                <p class="complete-message">
+                    Great job! You've successfully answered all 10 questions.<br>
+                    Click below to view your detailed analysis and performance breakdown.
+                </p>
+                <button class="btn btn-success" onclick="viewAnalysis()">📊 View Analysis</button>
+            </div> -->
+
+            <!-- Error State -->
+            <div class="error-state" id="errorState" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h3>Unable to Load Quiz</h3>
+                <p>We're having trouble loading the quiz questions. Please check your connection and try again.</p>
+                <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let answers = {};
+        let currentQuestion = 0;
+
+        // Get the skill from URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const quizSkill = urlParams.get('skill'); // e.g., "critical-thinking"
+
+        // Map skill name to categoryId in your DB
+        const skillToCategory = {
+            'criticalThinking': '1',
+            'creativity': '2',
+            'communication': '3',
+            'collaboration': '4'
+        };
+
+        const categoryId = skillToCategory[quizSkill] || '1';
+
+        // Load questions from backend
+        function loadQuestions() {
+            fetch(`http://localhost:3000/api/questions/${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data || data.length === 0) {
+                        throw new Error('No questions received from server');
+                    }
+
+                    questions = data.sort(() => Math.random() - 0.5).slice(0, 10);
+                    // Initialize start time
+                    window.startTime = new Date();
+
+
+                    document.getElementById('loadingState').style.display = 'none';
+                    document.getElementById('quizContent').style.display = 'block';
+
+                    loadQuestion();
+                })
+                .catch(err => {
+                    console.error('Error loading questions:', err);
+                    document.getElementById('loadingState').innerHTML = `
+                        <p style="color: red;">⚠ Failed to load questions. Please try again later.</p>
+                    `;
+                });
+        }
+
+        // Load single question
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                showQuizComplete();
+                return;
+            }
+
+            const question = questions[currentQuestion];
+
+            // Update progress
+            updateProgress();
+
+            // Update question content
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+
+            // Render options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.onclick = () => selectOption(index);
+
+                optionElement.innerHTML = `<div class="option-text">${option.text}</div>`;
+
+                if (answers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+
+                optionsContainer.appendChild(optionElement);
+            });
+
+            updateButtonStates();
+        }
+
+        // Handle option selection
+        function selectOption(optionIndex) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.option')[optionIndex].classList.add('selected');
+
+            answers[currentQuestion] = optionIndex;
+
+            updateButtonStates();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+
+        // Enable/disable buttons
+        function updateButtonStates() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.disabled = currentQuestion === 0;
+
+            const hasAnswer = answers.hasOwnProperty(currentQuestion);
+            nextBtn.disabled = !hasAnswer;
+
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.textContent = hasAnswer ? 'Finish Quiz' : 'Select Answer';
+                nextBtn.className = hasAnswer ? 'btn btn-success' : 'btn btn-primary';
+            } else {
+                nextBtn.textContent = 'Next';
+                nextBtn.className = 'btn btn-primary';
+            }
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (!answers.hasOwnProperty(currentQuestion)) return;
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showQuizComplete();
+            }
+        }
+
+        // Navigate to previous question
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        // Show quiz completion
+        function showQuizComplete() {
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('quizComplete').style.display = 'block';
+
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = 'Quiz Complete!';
+
+            calculateScore();
+        }
+
+        // Calculate total score
+        function calculateScore() {
+            let totalScore = 0;
+            questions.forEach((q, idx) => {
+                const selectedIndex = answers[idx];
+                if (selectedIndex !== undefined) {
+                    totalScore += q.options[selectedIndex].marks;
+                }
+            });
+
+            const maxScore = questions.length * 4; // max 4 marks per question
+            const percentage = ((totalScore / maxScore) * 100).toFixed(2);
+
+            document.getElementById('scoreText').textContent = `${totalScore} `;
+            document.getElementById('percentageText').textContent = `${percentage}%`;
+        }
+
+        // Show analysis modal after finishing quiz
+        function showAnalysis() {
+            const quizSkill = new URLSearchParams(window.location.search).get('skill') || 'Skill';
+            const totalScore = Object.entries(answers).reduce((acc, [qIdx, optIdx]) => {
+                return acc + (questions[qIdx].options[optIdx]?.marks || 0);
+            }, 0);
+            const maxScore = questions.length * 4;
+            const percentage = ((totalScore / maxScore) * 100).toFixed(2);
+
+            document.getElementById('analysisSkill').textContent = quizSkill.replace('-', ' ');
+            document.getElementById('analysisScore').textContent = totalScore;
+            document.getElementById('analysisMax').textContent = maxScore;
+            document.getElementById('analysisPercentage').textContent = percentage + '%';
+            document.getElementById('analysisTime').textContent = calculateTimeTaken();
+
+            document.getElementById('analysisModal').style.display = 'flex';
+        }
+
+
+        // Close analysis modal
+        function closeAnalysis() {
+            document.getElementById('analysisModal').style.display = 'none';
+        }
+
+        // Restart quiz - reloads same quiz
+        function restartQuiz() {
+            const skill = new URLSearchParams(window.location.search).get('skill');
+            window.location.href = `quiz.html?skill=${skill}`;
+        }
+
+        // Quit quiz - redirect to previous page (can be intro or skill page)
+        function quitQuiz() {
+            let skill = new URLSearchParams(window.location.search).get('skill');
+            // if (!skill) {
+            //     window.location.href = 'intro.html';
+            //     return;
+            // }
+
+            // skill = skill.toLowerCase(); // normalize to lowercase
+
+            // Map normalized skill names to their respective pages
+            const skillPages = {
+                'criticalThinking': 'criticalThinking.html',
+                'creativity': 'creativity.html',
+                'communication': 'communication.html',
+                'collaboration': 'collaboration.html'
+            };
+
+            const page = skillPages[skill] || 'intro.html'; // fallback
+            window.location.href = page;
+        }
+
+
+        // Go to intro/dashboard
+        function goToIntro() {
+            window.location.href = 'intro.html';
+        }
+
+        // Download analysis results as text file
+        function downloadAnalysis() {
+            const skill = document.getElementById('analysisSkill').textContent;
+            const score = document.getElementById('analysisScore').textContent;
+            const max = document.getElementById('analysisMax').textContent;
+            const percentage = document.getElementById('analysisPercentage').textContent;
+            const time = document.getElementById('analysisTime').textContent;
+
+            let content = `Quiz Analysis - ${skill}\n\n`;
+            content += `Score: ${score} / ${max}\n`;
+            content += `Percentage: ${percentage}\n`;
+            content += `Time Taken: ${time}\n`;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `quiz_analysis_${skill}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Reuse from previous code
+        function calculateTimeTaken() {
+            if (!startTime) return '0s';
+            const endTime = new Date();
+            const diff = endTime - startTime;
+            const minutes = Math.floor(diff / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            return minutes > 0 ? `${minutes} min ${seconds} sec` : `${seconds} sec`;
+        }
+
+
+        // Prevent accidental navigation
+        window.addEventListener('beforeunload', function(e) {
+            if (Object.keys(answers).length > 0 && currentQuestion < questions.length) {
+                e.preventDefault();
+                e.returnValue = 'You have an incomplete quiz. Are you sure you want to leave?';
+            }
+        });
+
+        // Initialize quiz on page load
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+                // Go back to previous page
+                function goBack() {
+                    window.history.back();
+                }
+    </script>
+</body>
+</html>

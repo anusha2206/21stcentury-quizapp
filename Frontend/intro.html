@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction - 21st Learning Skills</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -50px auto 0;
+            padding: 57px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro-card h2 {
+            color: #667eea;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .intro-card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .skills-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .skills-section h3 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .skill-card h4 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .skill-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .wiki-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .wiki-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .cta-btn.secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .skills-buttons {
+            display: none;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .skills-buttons.show {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skills-buttons h4 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* .skill-btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        } */
+         .skill-btn-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* always 2 equal columns */
+            gap: 15px;
+        }
+
+        .skill-btn {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            color: #333;
+            padding: 15px 20px;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .skill-btn:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .skill-btn .emoji {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .intro-card {
+                padding: 40px 30px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="login.html" class="back-btn">← Back to Dashboard</a>
+        <h1>21st Century Learning</h1>
+        <p>Discover the Four Essential Skills for Success in the Modern World</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-card">
+            <h2>About Our Project</h2>
+            <p>
+                Welcome to <span class="highlight">21st Learning</span>, an innovative educational platform designed 
+                to help learners master the essential skills needed for success in today's rapidly evolving world. 
+                Our project focuses on the <strong>"4C Skills"</strong> – the foundational competencies that education 
+                experts worldwide recognize as critical for thriving in the 21st century.
+            </p>
+            <p>
+                These skills go beyond traditional academic knowledge, empowering learners to think creatively, 
+                communicate effectively, collaborate meaningfully, and analyze information critically. Through 
+                interactive resources, curated videos, and practical applications, we help you develop these 
+                crucial abilities that will serve you in education, career, and life.
+            </p>
+        </div>
+
+        <div class="skills-section">
+            <h3>The 4C Skills Framework</h3>
+            <div class="skills-grid">
+                <!-- CHANGE HERE: Moved Critical Thinking to the top -->
+                <div class="skill-card">
+                    <div class="icon">🧠</div>
+                    <h4>Critical Thinking</h4>
+                    <p>
+                        Analyze information objectively, evaluate evidence, solve problems logically, and make 
+                        well-reasoned decisions based on facts and reasoning.
+                    </p>
+                    <a href="https://en.wikipedia.org/wiki/Critical_thinking" target="_blank" class="wiki-link">
+                        Learn More on Wikipedia
+                    </a>
+                </div>
+
+                <!-- CHANGE HERE: Creative Thinking now second -->
+                <div class="skill-card">
+                    <div class="icon">🎨</div>
+                    <h4>Creative Thinking</h4>
+                    <p>
+                        Generate original ideas, think outside the box, and develop innovative solutions to complex 
+                        problems. Creativity drives innovation and entrepreneurship in every field.
+                    </p>
+                    <a href="https://en.wikipedia.org/wiki/Creativity" target="_blank" class="wiki-link">
+                        Learn More on Wikipedia
+                    </a>
+                </div>
+
+                <!-- Communication third -->
+                <div class="skill-card">
+                    <div class="icon">💬</div>
+                    <h4>Communication</h4>
+                    <p>
+                        Master verbal, written, and visual communication to convey ideas effectively across different 
+                        audiences, platforms, and cultural contexts.
+                    </p>
+                    <a href="https://en.wikipedia.org/wiki/Communication" target="_blank" class="wiki-link">
+                        Learn More on Wikipedia
+                    </a>
+                </div>
+
+                <!-- Collaboration fourth -->
+                <div class="skill-card">
+                    <div class="icon">🤝</div>
+                    <h4>Collaboration</h4>
+                    <p>
+                        Work effectively with diverse teams, share responsibilities, and achieve common goals through 
+                        cooperative effort and mutual respect.
+                    </p>
+                    <a href="https://en.wikipedia.org/wiki/Collaboration" target="_blank" class="wiki-link">
+                        Learn More on Wikipedia
+                    </a>
+                </div>
+            </div>
+
+
+                
+
+        <div class="cta-section">
+            <h3>Ready to Start Your Learning Journey?</h3>
+            <p>
+                Explore each skill in depth with curated videos, reference materials, and interactive quizzes. 
+                Build the competencies that will set you apart in the 21st century.
+            </p>
+            <div class="cta-buttons">
+                <button onclick="toggleSkillsButtons()" class="cta-btn" id="exploreBtn">
+                    🚀 Explore All Skills
+                </button>
+                <!-- <a href="creativity.html" class="cta-btn secondary">
+                    🎨 Start with Creativity
+                </a> -->
+            </div>
+
+            <div id="skillsButtons" class="skills-buttons">
+                <h4>Choose a Skill to Explore:</h4>
+                <div class="skill-btn-grid">
+                    <!-- CHANGE HERE: Critical first -->
+                    <a href="criticalThinking.html" class="skill-btn">
+                        <span class="emoji">🧠</span>
+                        Critical Thinking
+                    </a>
+                    <!-- Creative second -->
+                    <a href="creativity.html" class="skill-btn">
+                        <span class="emoji">🎨</span>
+                        Creative Thinking
+                    </a>
+                    <!-- Communication third -->
+                    <a href="communication.html" class="skill-btn">
+                        <span class="emoji">💬</span>
+                        Communication
+                    </a>
+                    <!-- Collaboration fourth -->
+                    <a href="collaboration.html" class="skill-btn">
+                        <span class="emoji">🤝</span>
+                        Collaboration
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let skillsButtonsVisible = false;
+
+        function toggleSkillsButtons() {
+            const skillsButtons = document.getElementById('skillsButtons');
+            const exploreBtn = document.getElementById('exploreBtn');
+            
+            if (skillsButtonsVisible) {
+                skillsButtons.classList.remove('show');
+                exploreBtn.innerHTML = '🚀 Explore All Skills';
+                skillsButtonsVisible = false;
+            } else {
+                skillsButtons.classList.add('show');
+                exploreBtn.innerHTML = '📚 Hide Skills Menu';
+                skillsButtonsVisible = true;
+            }
+        }
+
+        // Add scroll animations
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.skill-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const cardVisible = 150;
+                
+                if (cardTop < window.innerHeight - cardVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize cards with opacity 0 for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.skill-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Trigger animation after a short delay
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 200);
+        });
+    </script>
+</body>
+</html>
